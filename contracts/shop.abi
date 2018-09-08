@@ -1,0 +1,28 @@
+[
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "invoice",
+				"type": "uint256"
+			}
+		],
+		"name": "InvoicePayed",
+		"type": "event"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_invoice",
+				"type": "uint256"
+			}
+		],
+		"name": "pay",
+		"outputs": [],
+		"payable": true,
+		"stateMutability": "payable",
+		"type": "function"
+	}
+]

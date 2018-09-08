@@ -3,9 +3,14 @@ import Web3 from 'web3';
 import './ShowcaseItem.css';
 import { config } from './config.js';
 
-let web3js = new Web3();
+let web3js = new Web3(new Web3.providers.WebsocketProvider(config.infura.url));
 
-console.log(config);
+//web3js.eth.getBlockNumber().then(console.log);
+
+let subscription = web3js.eth.subscribe('logs', { address: config.contract.address }, (error, result) => {
+  if (!error)
+    console.log('>', result);
+});
 
 function formatPrice(weiPriceString) {
   let price = web3js.utils.fromWei(weiPriceString);

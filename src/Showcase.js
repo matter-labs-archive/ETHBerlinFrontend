@@ -3,7 +3,6 @@ import ShowcaseItem from './ShowcaseItem';
 import cake from './cake.jpg';
 import cupcakes from './cupcakes.jpg';
 import macaroni from './macaroni.jpg';
-import './Showcase.css';
 
 const items = [
   {
