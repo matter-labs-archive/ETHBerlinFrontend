@@ -29,10 +29,11 @@ const items = [
 class Showcase extends Component {
   render() {
     return (
-      <div className="Showcase">
+      <div>
+        <h1 className="display-4">Store</h1>
         <div className="card-deck text-center">
           {items.map(function (item) {
-            return <ShowcaseItem title={item.title} price={item.price} image={item.image} />
+            return <ShowcaseItem key={item.key} title={item.title} price={item.price} image={item.image} />
           })}
         </div>
       </div>
