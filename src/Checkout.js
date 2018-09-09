@@ -22,13 +22,16 @@ class Checkout extends Component {
         <h1 className="display-4">Checkout</h1>
         <table className="table">
           <thead>
-            <tr><th className="text-left">Title</th><th>Price</th><th>quantity</th></tr>
+            <tr><th className="text-left">Title</th><th>Price</th><th>Quantity</th></tr>
           </thead>
           <tbody>
           	{this.props.location.state.selectedItems.map(function (item) {
               return <tr><td className="text-left">{item.item.title}</td><td>{formatPrice(item.item.price)}</td><td>{item.q}</td></tr>
             }, this)}
           </tbody>
+          <tfoot>
+            <tr><th className="text-left">Total</th><th>{formatPrice(this.props.location.state.total)}</th><th>{this.props.location.state.count}</th></tr>
+          </tfoot>
         </table>
         <p>
         	<button className="btn btn-success btn-lg" type='button' onClick={this.onBtnCheckout}>Confirm</button>
@@ -40,7 +43,7 @@ class Checkout extends Component {
   onBtnCheckout = (event) => {
     let address = '0xaaf3A96b8f5E663Fc47bCc19f14e10A3FD9c414B';
     let invoice = getInvoice();
-    let total = 10000;
+    let total = this.props.location.state.total;
 
     this.props.history.push({pathname: '/wait', state: { deeplink: `ethereum:${address}/pay?uint256=${invoice}&value=${total}` }});
   }
