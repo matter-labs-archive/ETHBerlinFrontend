@@ -26,17 +26,44 @@ const items = [
 ];
 
 class Showcase extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedItems: [],
+    };
+  }
+
   render() {
     return (
       <div>
         <h1 className="display-4">Store</h1>
         <div className="card-deck text-center">
           {items.map(function (item) {
-            return <ShowcaseItem key={item.key} title={item.title} price={item.price} image={item.image} />
-          })}
+            return <ShowcaseItem key={item.key} title={item.title} price={item.price} image={item.image} onClick={() => { this.onClickItem(item) }} />
+          }, this)}
         </div>
+        <p className="lead"><strong>{this.state.selectedItems.length}</strong> items in cart</p>
+        <button type="button" className="btn btn-primary btn-lg" onClick={this.onCheckout}>Check Out</button>
       </div>
     )
+  }
+
+  onClickItem = (item) => {
+    let selectedItem = { key: item.key, item: item, q: 1 };
+
+    let selectedItems = this.state.selectedItems;
+    selectedItems.push(selectedItem);
+    
+    this.setState({
+      selectedItems: selectedItems
+    });
+  }
+
+  onCheckout = () => {
+    if (this.state.selectedItems.length == 0)
+      alert('Please select items');
+    else
+      this.props.history.push({pathname: '/checkout', state: { selectedItems: this.state.selectedItems }});
   }
 }
 

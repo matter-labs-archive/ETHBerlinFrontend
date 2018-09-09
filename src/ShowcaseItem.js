@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Web3 from 'web3';
-import './ShowcaseItem.css';
 import { config } from './config.js';
+import './ShowcaseItem.css';
 
 let web3js = new Web3(new Web3.providers.WebsocketProvider(config.infura.url));
 
@@ -27,7 +27,7 @@ class ShowcaseItem extends Component {
         </div>
         <div className="card-body">
           <h1 className="card-title pricing-card-title">{formatPrice(this.props.price)}</h1>
-          <button type="button" className="btn btn-lg btn-block btn-outline-primary">Buy</button>
+          <button type="button" className="btn btn-lg btn-block btn-outline-primary" onClick={this.props.onClick}>Buy</button>
         </div>
       </div>
     )
