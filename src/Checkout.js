@@ -6,7 +6,8 @@ import './Checkout.css';
 let web3js = new Web3(new Web3.providers.WebsocketProvider(config.infura.url));
 
 function getInvoice() {
-	return '42';
+  // TODO: SHA256(receipt_json_string)
+	return web3js.eth.accounts.create().address;
 }
 
 function formatPrice(weiPriceString) {
