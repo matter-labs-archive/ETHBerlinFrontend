@@ -5,9 +5,12 @@ import './Checkout.css';
 
 let web3js = new Web3(new Web3.providers.WebsocketProvider(config.infura.url));
 
-function getInvoice() {
-  // TODO: SHA256(receipt_json_string)
-	return web3js.eth.accounts.create().address;
+function getNonce() {
+	return web3js.utils.randomHex(32);
+}
+
+function getInvoice(receiptString) {
+  return web3js.utils.keccak256(receiptString)
 }
 
 function formatPrice(weiPriceString) {
@@ -42,10 +45,15 @@ class Checkout extends Component {
 
   onBtnCheckout = (event) => {
     let address = '0xaaf3A96b8f5E663Fc47bCc19f14e10A3FD9c414B';
-    let invoice = getInvoice();
     let total = this.props.location.state.total;
+    let receipt = {
+      items: this.props.location.state.selectedItems,
+      nonce: getNonce(),
+    }
+    let receiptString = JSON.stringify(receipt, null, 2);
+    let invoice = getInvoice(receiptString);
 
-    this.props.history.push({pathname: '/wait', state: { deeplink: `ethereum:${address}/pay?uint256=${invoice}&value=${total}` }});
+    this.props.history.push({pathname: '/wait', state: { receipt: receiptString, deeplink: `ethereum:${address}/pay?uint256=${invoice}&value=${total}` }});
   }
 }
 

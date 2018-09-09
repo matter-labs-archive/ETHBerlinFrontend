@@ -2,3 +2,16 @@
 	margin-top: 3rem;
 	margin-bottom: 3rem;
 }
+
+h3 {
+	margin-top: 3rem;
+	margin-bottom: 2rem;
+}
+
+pre {
+	margin: 0 auto;
+	width: 600px;
+	padding: 16px;
+	font-weight: bold;
+	background-color: #eeeeee;	
+}

@@ -16,6 +16,13 @@ class Wait extends Component {
         <p className="text-center qrcode"><QRCode value={this.props.location.state.deeplink} /></p>
         <p><a href={this.props.location.state.deeplink} target="_blank">{this.props.location.state.deeplink}</a></p>
         <p className="lead">Do not leave this page until transaction will be confirmed.<br/>You will be automatically redirected to the next step.</p>
+        <hr />
+        <h3>Receipt</h3>
+        <code className="text-left">
+          <pre>
+            {this.props.location.state.receipt}
+          </pre>
+        </code>
       </div>
     )
   }
