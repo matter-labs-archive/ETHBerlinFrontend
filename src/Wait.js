@@ -1,12 +1,24 @@
 import React, { Component } from 'react';
 import QRCode from 'react-qr-code';
+import Web3 from 'web3';
+import { config } from './config.js';
 import './Wait.css';
+
+let web3js = new Web3(new Web3.providers.WebsocketProvider(config.infura.url));
+
+web3js.eth.getBlockNumber().then(console.log);
+
+let subscription = null;
 
 class Wait extends Component {
   componentDidMount() {
-    setTimeout(() => {
-    	this.props.history.push('/done');
-    }, 60000);
+    subscription = web3js.eth.subscribe('logs', { address: config.contract.address }, (error, result) => {
+      if (!error && result.data === this.props.location.state.invoice) {
+        console.log('>', result);
+        this.props.history.push('/done');
+        // TODO: unsubscribe
+      }
+    });
   }
 
   render() {

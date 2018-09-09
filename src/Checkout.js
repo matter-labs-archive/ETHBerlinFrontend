@@ -48,12 +48,12 @@ class Checkout extends Component {
     let total = this.props.location.state.total;
     let receipt = {
       items: this.props.location.state.selectedItems,
-      nonce: getNonce(),
+      nonce: getNonce(),invoice
     }
     let receiptString = JSON.stringify(receipt, null, 2);
     let invoice = getInvoice(receiptString);
 
-    this.props.history.push({pathname: '/wait', state: { receipt: receiptString, deeplink: `ethereum:${address}/pay?uint256=${invoice}&value=${total}` }});
+    this.props.history.push({pathname: '/wait', state: { invoice: invoice, receipt: receiptString, deeplink: `ethereum:${address}/pay?uint256=${invoice}&value=${total}` }});
   }
 }
 
