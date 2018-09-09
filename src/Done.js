@@ -8,6 +8,13 @@ class Done extends Component {
         <div className="jumbotron">
         	<h1 className="text-success">Success</h1>
         </div>
+        <hr />
+        <h3>Receipt</h3>
+        <code className="text-left">
+          <pre>
+            {this.props.location.state.receipt}
+          </pre>
+        </code>
       </div>
     )
   }

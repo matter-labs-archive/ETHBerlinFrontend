@@ -15,8 +15,8 @@ class Wait extends Component {
     subscription = web3js.eth.subscribe('logs', { address: config.contract.address }, (error, result) => {
       if (!error && result.data === this.props.location.state.invoice) {
         console.log('>', result);
-        this.props.history.push('/done');
-        // TODO: unsubscribe
+        this.props.history.push({pathname: '/done', state: { receipt: this.props.location.state.receipt }});
+        // web3js.eth.clearSubscriptions();
       }
     });
   }
